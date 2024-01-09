@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -7,14 +10,6 @@ public class MyEntry <K, V> {
 
     K key;
     V name;
-
-
-    List<V> array;
-    LinkedHashMap<K, V> map;
-    public MyEntry() {
-        this.map = new LinkedHashMap<>();
-       // this.array = new ArrayList<>();
-    }
 
     public MyEntry(K obj1, V obj2) {
         super();
@@ -47,4 +42,60 @@ public class MyEntry <K, V> {
     }
 
 
+}
+
+class Map <K, V> {
+    private List<MyEntry<K, V>> list;
+
+    public Map() {
+        this.list = new ArrayList<>();
+    }
+
+    public void add(K key, V name) {
+        MyEntry<K, V> entry = new MyEntry<>(key, name);
+        list.add(entry);
+        System.out.println("Ключ - " + key + ", Значення - " + name);
+
+    }
+
+    public void removeKey(K key) {
+
+        for (Iterator<MyEntry<K, V>> iterator = list.iterator(); iterator.hasNext(); ) {
+            MyEntry<K, V> entry = iterator.next();
+            if (entry.getKey().equals(key)) {
+                iterator.remove();
+                System.out.println("Об'єкт з ключем - " + key + " був видаленим");
+            }
+        }
+    }
+
+    public void removeValue(V value){
+
+        for(Iterator<MyEntry<K, V>> iterator = list.iterator(); iterator.hasNext();){
+            MyEntry<K, V> next = iterator.next();
+            if (next.getName().equals(value)){
+                iterator.remove();
+                System.out.println("Об'єкт з іменем - " + value + " був видаленим");
+            }
+        }
+
+    }
+
+    public void output(){
+        for (MyEntry<K, V> entry : list) {
+            System.out.println(entry.toString());
+        }
+    }
+
+    public void outputSetKey(){
+        for(MyEntry<K,V> entry : list){
+            System.out.println(entry.getKey());
+        }
+    }
+
+    public void outputListValue(){
+        for(MyEntry<K,V> entry : list){
+            System.out.println(entry.getName());
+        }
+    }
 }
